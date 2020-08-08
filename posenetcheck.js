@@ -1,5 +1,5 @@
 let pose;
-
+let skelton;
 function setup(){
 	createCanvas(500,500);
 	video=createCapture(
@@ -25,6 +25,7 @@ function getposes(poses){
 	console.log(poses);
 	if(poses.length>0){
 		pose=poses[0];
+		skelton=poses[0].skeleton;
 	}
 
 	
@@ -46,6 +47,16 @@ function draw(){
 			var y=pose.pose.keypoints[i].position.y;
 			ellipse(x,y,12,12);
 		}
+		if(skelton){
+		for(var i=0;i<skelton.length;i++){
+			let p1=skelton[i][0];
+			let p2=skelton[i][1];
+			strokeWeight(2);
+			stroke(255);
+			line(p1.position.x,p1.position.y,p2.position.x,p2.position.y);
+		}
+	}
 		
 	}
+
 }
